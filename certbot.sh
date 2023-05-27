@@ -11,6 +11,10 @@ PLAIN='\033[0m'
 CertPath="/etc/letsencrypt/live"
 CRON="/etc/cron.d/certbot"
 
+colorEcho() {
+    echo -e "${1}${@:2}${PLAIN}"
+}
+
 checkSystem() {
     result=$(id | awk '{print $1}')
     if [[ $result != "uid=0(root)" ]]; then
