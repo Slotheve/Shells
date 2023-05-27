@@ -8,7 +8,7 @@ YELLOW="\033[33m"
 BLUE="\033[36m"
 PLAIN='\033[0m'
 
-CertPath="/etc/letsencrypt/live/"
+CertPath="/etc/letsencrypt/live"
 CRON="/etc/cron.d/certbot"
 
 checkSystem() {
@@ -29,10 +29,13 @@ checkSystem() {
             exit 1
         fi
         PMT="apt"
-        CMD_INSTALL="apt update && apt autoremove -y && apt install -y "
+        CMD_INSTALL="apt install -y"
+		CMD_AUTOREMOVE="apt autoremove -y"
+		CMD_UPGRADE="apt update"
     else
         PMT="yum"
-        CMD_INSTALL="yum install -y "
+        CMD_INSTALL="yum install -y"
+		CMD_UPGRADE=""
     fi
     res=`which systemctl 2>/dev/null`
     if [[ "$?" != "0" ]]; then
@@ -42,22 +45,26 @@ checkSystem() {
 }
 
 Install() {
+    checkSystem
     if   [[ $PMT = "apt" ]]; then
         DNS="python3-certbot-dns-cloudflare"
     elif [[ $PMT = "yum" ]]; then
         DNS="python2-certbot-dns-cloudflare"
     fi
-    $CMD_INSTALL certbot $DNS
+    $CMD_UPGRADE && $CMD_AUTOREMOVE && $CMD_INSTALL certbot $DNS
+    mkdir -p /etc/letsencrypt/
     touch /etc/letsencrypt/cloudflare.ini
-    
+    echo ""
+	echo ""
     read -p " 请输入CloudFlare邮箱: " MAIL
+	echo ""
     read -p " 请输入CloudFlare Global api：" KEY
     cat > /etc/letsencrypt/cloudflare.ini << EOF
 dns_cloudflare_email = $MAIL
 dns_cloudflare_api_key = $KEY
 EOF
     chmod 600 /etc/letsencrypt/cloudflare.ini
-    echo -e " ${YELLO}安装完成${PLAIN}"
+    echo -e " ${YELLOW}安装完成${PLAIN}"
 }
 
 ApplyCert() {
@@ -70,18 +77,19 @@ ApplyCert() {
 
 CopyCert() {
     read -p " 请输入域名 (泛域名请输入xxxx.com) ：" DOMAIN
-    read -p " 请输入安装路径：" PATH
-
-    cp $CertPath/$DOMAIN/*.pem $PATH
-    echo -e " ${YELLO}安装成功${PLAIN}"
+    read -p " 请输入安装路径：" PATHS
+    rm -rf $PATHS/*.pem && cp $CertPath/$DOMAIN/*.pem $PATHS
+    echo -e " ${YELLOW}安装成功${PLAIN}"
 }
 
 AutoRenew() {
     echo -e " ${BLUE}因CertBot会自动设置续期, 故只设置自动复制新证书${PLAIN}"
     read -p " 请输入域名 (泛域名请输入xxxx.com) ：" DOMAIN
-    read -p " 请输入安装路径：" PATH
-    sed -i '$a\0 */12 * * * rm -rf $PATH/*.pem && cp $CertPath/$DOMAIN/*.pem $PATH' $CRON
-    echo -e " ${YELLO}设置完成, 请重启使用证书的服务${PLAIN}"
+    read -p " 请输入安装路径：" PATHS
+    cat >> $CRON << EOF
+0 */12 * * * rm -rf $PATHS/*.pem && cp $CertPath/$DOMAIN/*.pem $PATHS
+EOF
+    echo -e " ${YELLOW}设置完成, 请在续期后重启使用证书的服务${PLAIN}"
 }
 
 Editor() {
@@ -91,7 +99,7 @@ Editor() {
 dns_cloudflare_email = $MAIL
 dns_cloudflare_api_key = $KEY
 EOF
-    echo -e " ${YELLO}修改成功${PLAIN}"
+    echo -e " ${YELLOW}修改成功${PLAIN}"
 }
 
 menu() {
