@@ -45,7 +45,6 @@ checkSystem() {
 }
 
 Install() {
-    checkSystem
     if   [[ $PMT = "apt" ]]; then
         DNS="python3-certbot-dns-cloudflare"
     elif [[ $PMT = "yum" ]]; then
