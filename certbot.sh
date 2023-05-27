@@ -148,5 +148,5 @@ menu() {
 	esac
 }
 
-check_sys
+checkSystem
 menu
