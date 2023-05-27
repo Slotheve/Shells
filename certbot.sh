@@ -34,36 +34,4 @@ checkSystem() {
     fi
 }
 
-DNS=(
-cloudflare
-dnspod
-Aliyun
-Google
-OVH
-Gandi
-DnsSimple
-DigitalOcean
-
-)
-
-selectDNS() {
-	for ((i=1;i<=${#ciphers[@]};i++ )); do
-		hint="${ciphers[$i-1]}"
-		echo -e "${green}${i}${plain}) ${hint}"
-	done
-	read -p "你选择什么加密方式(默认: ${ciphers[0]}):" pick
-	[ -z "$pick" ] && pick=1
-	expr ${pick} + 1 &>/dev/null
-	if [ $? -ne 0 ]; then
-		echo -e "[${red}Error${plain}] Please enter a number"
-		continue
-	fi
-	if [[ "$pick" -lt 1 || "$pick" -gt ${#ciphers[@]} ]]; then
-		echo -e "${BLUE}[${PLAIN}${RED}Error${PLAIN}${BLUE}]${PLAIN} ${BLUE}请正确选择${PLAIN}"
-		exit 0
-	fi
-	METHOD=${ciphers[$pick-1]}
-	colorEcho $BLUE " 加密：${ciphers[$pick-1]}"
-}
-
-$CMD_UPGRADE && $CMD_INSTALL certbot $PLUGIN
+$CMD_UPGRADE && $CMD_INSTALL certbot python3-certbot-dns-cloudflare
