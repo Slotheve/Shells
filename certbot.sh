@@ -1,5 +1,5 @@
 #!/bin/bash
-# OS安装识别脚本
+# CertBot一键脚本
 # Author: Slotheve<https://slotheve.com>
 
 RED="\033[31m"
