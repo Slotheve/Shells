@@ -53,10 +53,11 @@ Install() {
     read -p " 请输入CloudFlare邮箱: " MAIL
     read -p " 请输入CloudFlare Global api：" KEY
     cat > /etc/letsencrypt/cloudflare.ini << EOF
-    dns_cloudflare_email = $MAIL
-    dns_cloudflare_api_key = $KEY
-    EOF
+dns_cloudflare_email = $MAIL
+dns_cloudflare_api_key = $KEY
+EOF
     chmod 600 /etc/letsencrypt/cloudflare.ini
+    echo -e " ${YELLO}安装完成${PLAIN}"
 }
 
 ApplyCert() {
@@ -72,6 +73,7 @@ CopyCert() {
     read -p " 请输入安装路径：" PATH
 
     cp $CertPath/$DOMAIN/*.pem $PATH
+    echo -e " ${YELLO}安装成功${PLAIN}"
 }
 
 AutoRenew() {
@@ -79,15 +81,17 @@ AutoRenew() {
     read -p " 请输入域名 (泛域名请输入xxxx.com) ：" DOMAIN
     read -p " 请输入安装路径：" PATH
     sed -i '$a\0 */12 * * * rm -rf $PATH/*.pem && cp $CertPath/$DOMAIN/*.pem $PATH' $CRON
+    echo -e " ${YELLO}设置完成, 请重启使用证书的服务${PLAIN}"
 }
 
 Editor() {
     read -p " 请输入CloudFlare邮箱: " MAIL
     read -p " 请输入CloudFlare Global api：" KEY
     cat > /etc/letsencrypt/cloudflare.ini << EOF
-    dns_cloudflare_email = $MAIL
-    dns_cloudflare_api_key = $KEY
-    EOF
+dns_cloudflare_email = $MAIL
+dns_cloudflare_api_key = $KEY
+EOF
+    echo -e " ${YELLO}修改成功${PLAIN}"
 }
 
 menu() {
