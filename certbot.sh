@@ -114,8 +114,7 @@ menu() {
 	echo -e "  ${GREEN}1.${PLAIN}  安装CertBot"
 	echo -e "  ${GREEN}2.${PLAIN}  申请证书"
 	echo -e "  ${GREEN}3.${PLAIN}  安装证书"
-	echo -e "  ${GREEN}4.${PLAIN}  设置自动续期"
-	echo -e "  ${GREEN}5.${PLAIN}  修改API信息"
+	echo -e "  ${GREEN}4.${PLAIN}  修改API信息"
 	echo " -------------"
 	echo -e "  ${GREEN}0.${PLAIN}  退出"
 	echo ""
@@ -136,9 +135,6 @@ menu() {
 			CopyCert
 			;;
 		4)
-			AutoRenew
-			;;
-		5)
 			Editor
 			;;
 		*)
