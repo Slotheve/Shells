@@ -303,15 +303,15 @@ Edit_2() {
 }
 
 Uninstall() {
-	read -p " 确定卸载frp？[y/n]：" answer
-	if [[ "${answer,,}" = "y" ]]; then
-      systemctl stop xray
-      systemctl disable xray
-      rm -rf /etc/systemd/system/frp.service
-      systemctl daemon-reload
-      rm -rf /etc/frp
-      colorEcho $GREEN " frp卸载成功"
-	fi
+    read -p " 确定卸载frp？[y/n]：" answer
+    if [[ "${answer,,}" = "y" ]]; then
+        systemctl stop xray
+        systemctl disable xray
+        rm -rf /etc/systemd/system/frp.service
+        systemctl daemon-reload
+        rm -rf /etc/frp
+        colorEcho $GREEN " frp卸载成功"
+    fi
 }
 
 menu() {
@@ -351,7 +351,7 @@ menu() {
 			Edit_2
 			;;
 		5)
-			UnInstall
+			Uninstall
 			;;
 		*)
 			colorEcho $RED " 请选择正确的操作！"
