@@ -231,7 +231,7 @@ Edit_1() {
 
 Install_2() {
     API="https://api.github.com/repos/fatedier/frp/releases/latest"
-    VER="$(normalizeVersion "$(curl -s "${API}" --connect-timeout 10| grep -Eo '\"tag_name\"(.*?)\",' | cut -d\" -f4 | cut -d v -f2)")"
+    VER=`curl -s "${API}" --connect-timeout 10| grep -Eo '\"tag_name\"(.*?)\",' | cut -d\" -f4 | cut -d v -f2`
     DOWNLOAD_LINK="https://github.com/fatedier/frp/releases/download/v${VER}/frp_${VER}_linux_$(Arch).tar.gz"
     mkdir -p /etc/frp
     $CMD_UPDATE && $CMD_AUTO && $CMD_INSTALL wget vim nano tar openssl
