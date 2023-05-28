@@ -353,6 +353,7 @@ menu() {
 		4)
 			Edit_2
                         systemctl restart frp >/dev/null 2>&1
+                        colorEcho ${BLUE}  "已重启FRP"
 			;;
 		5)
 			Uninstall
