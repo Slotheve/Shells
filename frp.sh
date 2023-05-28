@@ -175,8 +175,8 @@ Install_1() {
     DOWNLOAD_LINK="https://github.com/fatedier/frp/releases/download/v${VER}/frp_${VER}_linux_$(Arch).tar.gz"
     mkdir -p /etc/frp
     $CMD_UPDATE && $CMD_AUTO && $CMD_INSTALL wget tar openssl
-    curl -L -H "Cache-Control: no-cache" ${DOWNLOAD_LINK}
-    tar -xzvf frp_${VER}_linux_$(Arch).tar.gz
+    curl -L -H "Cache-Control: no-cache" -o frp.tar.gz ${DOWNLOAD_LINK}
+    tar -xzvf frp.tar.gz
     rm -rf frp_${VER}_linux_$(Arch).tar.gz
     cd frp_${VER}_linux_$(Arch)
     cp frps /usr/local/bin/frp
@@ -235,8 +235,8 @@ Install_2() {
     DOWNLOAD_LINK="https://github.com/fatedier/frp/releases/download/v${VER}/frp_${VER}_linux_$(Arch).tar.gz"
     mkdir -p /etc/frp
     $CMD_UPDATE && $CMD_AUTO && $CMD_INSTALL wget vim nano tar openssl
-    curl -L -H "Cache-Control: no-cache" ${DOWNLOAD_LINK}
-    tar -xzvf frp_${VER}_linux_$(Arch).tar.gz
+    curl -L -H "Cache-Control: no-cache" -o frp.tar.gz ${DOWNLOAD_LINK}
+    tar -xzvf frp.tar.gz
     rm -rf frp_${VER}_linux_$(Arch).tar.gz
     cd frp_${VER}_linux_$(Arch)
     cp frpc /usr/local/bin/frp
