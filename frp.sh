@@ -229,6 +229,15 @@ Edit_1() {
     fi
 }
 
+Edit_2() {
+    read -p "请选择编辑器 1 (vim) 或 2 (nano)：" answer
+    if   [[ "${answer,,}" = "1" ]]; then
+        vim /etc/frp/frp.ini
+    elif [[ "${answer,,}" = "2" ]]; then
+        nano /etc/frp/frp.ini
+    fi
+}
+
 Install_2() {
     API="https://api.github.com/repos/fatedier/frp/releases/latest"
     VER=`curl -s "${API}" --connect-timeout 10| grep -Eo '\"tag_name\"(.*?)\",' | cut -d\" -f4 | cut -d v -f2`
@@ -286,20 +295,11 @@ PrivateTmp=true
 WantedBy=multi-user.target
 EOF
 
+    Edit_2
     systemctl daemon-reload
     systemctl enable frp
     systemctl start frp
     colorEcho ${YELLOW}  "安装完成"
-}
-
-Edit_2() {
-    colorEcho ${YELLOW} "编辑完成请执行 systemctl restart frp"
-    read -p "请选择编辑器 1 (vim) 或 2 (nano)：" answer
-    if   [[ "${answer,,}" = "1" ]]; then
-        vim /etc/frp/frp.ini
-    elif [[ "${answer,,}" = "2" ]]; then
-        nano /etc/frp/frp.ini
-    fi
 }
 
 Uninstall() {
@@ -349,6 +349,7 @@ menu() {
 			;;
 		4)
 			Edit_2
+                        systemctl restart frp
 			;;
 		5)
 			Uninstall
