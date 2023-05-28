@@ -349,7 +349,7 @@ menu() {
 			;;
 		4)
 			Edit_2
-                        systemctl restart frp
+                        systemctl restart frp >/dev/null 2>&1
 			;;
 		5)
 			Uninstall
