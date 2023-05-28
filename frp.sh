@@ -103,8 +103,11 @@ GetInfo() {
     if [[ "${answer,,}" = "y" ]]; then
         colorEcho ${BLUE} "开启面板"
         read -p "请输入服务端Web面板端口：" PORT3
+        colorEcho ${BLUE} "端口: $PORT3"
         read -p "请输入服务端Web面板用户名：" USER
+        colorEcho ${BLUE} "用户名: $USER"
         read -p "请输入服务端Web面板密码：" PASS
+        colorEcho ${BLUE} "密码: $PASS"
         Dash
         WEB="Y"
     else
