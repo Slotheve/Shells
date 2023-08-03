@@ -166,18 +166,18 @@ menu() {
 	echo -e "#    ${GREEN}TG群${PLAIN}: https://t.me/slotheve     #"
 	echo "######################################"
 	echo " -------------------"
-  echo -e "  ${GREEN}1.${PLAIN}  安装AutoSSH"
+	echo -e "  ${GREEN}1.${PLAIN}  安装AutoSSH"
 	echo -e "  ${GREEN}2.${PLAIN}    设置穿透"
-  echo -e "  ${GREEN}3.${PLAIN}  列出穿透列表"
+	echo -e "  ${GREEN}3.${PLAIN}  列出穿透列表"
 	echo -e "  ${GREEN}4.${PLAIN}    移除穿透"
-  echo -e "  ${GREEN}5.${PLAIN}  ${RED}卸载AutoSSH${PLAIN}"
+	echo -e "  ${GREEN}5.${PLAIN}  ${RED}卸载AutoSSH${PLAIN}"
 	echo -e "  ${GREEN}6.${PLAIN}设置SSH${RED} (必要步骤)${PLAIN}"
 	echo " -------------------"
 	echo -e "  ${GREEN}0.${PLAIN}     退出"
 	echo ""
 	echo 
 
-	read -p " 请选择操作[0-4]：" answer
+	read -p " 请选择操作[0-6]：" answer
 	case $answer in
 		0)
 			exit 0
