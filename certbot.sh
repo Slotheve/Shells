@@ -73,7 +73,7 @@ EOF
 
 ApplyCert() {
     echo -e " ${BLUE}首次申请需要填写邮箱并同意协议, 前几次失败很正常, 请尝试重新申请${PLAIN}"
-    read -p " 请输入域名, 若有多个域名, 请使用','隔开：" DOMAIN
+    read -p " 请输入域名, 若有多个域名, 请使用','隔开 (泛域名请输入xxxx.com,*.xxxx.com)：" DOMAIN
     certbot certonly --dns-cloudflare \
       --dns-cloudflare-credentials /etc/letsencrypt/cloudflare.ini \
       -d $DOMAIN
@@ -88,7 +88,7 @@ CopyCert() {
 
 AutoRenew() {
     echo -e " ${BLUE}因CertBot会自动设置续期, 故只设置自动复制新证书${PLAIN}"
-    read -p " 请输入域名 (泛域名请输入xxxx.com) ：" DOMAIN
+    read -p " 请输入域名 (泛域名请输入xxxx.com,*.xxxx.com) ：" DOMAIN
     read -p " 请输入安装路径：" PATHS
     cat >> $CRON << EOF
 0 */12 * * * rm -rf $PATHS/*.pem && cp $CertPath/$DOMAIN/*.pem $PATHS
