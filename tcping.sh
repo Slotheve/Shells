@@ -55,7 +55,7 @@ archAffix() {
 
 Install() {
 	checkSystem
-	wget --no-check-certificate -O /usr/bin/tcping https://raw.githubusercontent.com/Slotheve/backup/main/tcping-${ARCH}
+	wget --no-check-certificate -O /usr/bin/tcping https://raw.githubusercontent.com/Slotheve/backup/main/tcping-$ARCH
 	chmod +x /usr/bin/tcping
   colorEcho $BLUE " 安装完成"
 }
