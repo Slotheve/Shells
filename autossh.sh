@@ -60,6 +60,7 @@ EOF
 }
 
 SetSSH() {
+    chmod 600 ~/.ssh/*
     read -p " 请输入远程机IP：" IP
     colorEcho ${BLUE}  " $IP"
     read -p " 请输入远程机SSH端口：" PORT
