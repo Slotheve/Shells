@@ -41,23 +41,6 @@ checkSystem() {
     fi
 }
 
-archAffix() {
-    case "$(uname -m)" in
-        x86_64|amd64)
-            ARCH="amd64"
-        ;;
-        armv8|aarch64)
-            ARCH="arm64"
-        ;;
-        *)
-            colorEcho $RED " 不支持的CPU架构！"
-            exit 1
-        ;;
-    esac
-
-	return 0
-}
-
 Install() {
     checkSystem
     archAffix
@@ -68,5 +51,4 @@ Install() {
     colorEcho $BLUE " 安装完成"
 }
 
-checkSystem
 Install
