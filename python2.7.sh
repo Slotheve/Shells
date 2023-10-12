@@ -27,12 +27,12 @@ checkSystem() {
         fi
         PMT="apt"
         CMD_INSTALL="apt install -y"
-	      CMD_AUTOREMOVE="apt autoremove -y"
-	      CMD_UPGRADE="apt update"
+        CMD_AUTOREMOVE="apt autoremove -y"
+        CMD_UPGRADE="apt update"
     else
         PMT="yum"
         CMD_INSTALL="yum install -y"
-	      CMD_UPGRADE=""
+        CMD_UPGRADE=""
     fi
     res=`which systemctl 2>/dev/null`
     if [[ "$?" != "0" ]]; then
