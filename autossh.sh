@@ -33,13 +33,13 @@ checkSystem() {
         fi
         PMT="apt"
         CMD_INSTALL="apt install -y"
-	      CMD_AUTOREMOVE="apt autoremove -y"
-	      CMD_UPGRADE="apt update"
-	      CMD_REMOVE="apt remove -y"
+        CMD_AUTOREMOVE="apt autoremove -y"
+        CMD_UPGRADE="apt update"
+        CMD_REMOVE="apt remove -y"
     else
         PMT="yum"
         CMD_INSTALL="yum install -y"
-	      CMD_REMOVE="yum remove -y"
+        CMD_REMOVE="yum remove -y"
     fi
     res=`which systemctl 2>/dev/null`
     if [[ "$?" != "0" ]]; then
@@ -49,7 +49,6 @@ checkSystem() {
 }
 
 Install() {
-    checkSystem
     $CMD_UPGRADE && $CMD_AUTOREMOVE && $CMD_INSTALL autossh lsof
     mkdir -p /etc/autossh
     cat > /etc/autossh/penetrate.sh << EOF
@@ -120,7 +119,7 @@ EOF
     if [[ ! -n "$RES" ]]; then
         colorEcho ${YELLOW}  " 安装完成, 穿透后信息$IP-$PORT3"
     else
-	      colorEcho ${YELLOW}  " 安装失败, 请检查端口是否冲突"
+	colorEcho ${YELLOW}  " 安装失败, 请检查端口是否冲突"
     fi
 }
 
@@ -147,13 +146,12 @@ Remove() {
 }
 
 UnInstall() {
-    checkSystem
     echo ""
     read -p " 确定卸载AutoSSH？[y/n]：" answer
     if [[ "${answer,,}" = "y" ]]; then
         rm -rf /etc/systemd/system/autossh*.service
         systemctl daemon-reload
-	      $CMD_REMOVE autossh
+	$CMD_REMOVE autossh
         colorEcho $GREEN " autossh卸载成功"
     fi
 }
