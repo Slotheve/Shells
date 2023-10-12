@@ -59,12 +59,12 @@ archAffix() {
 }
 
 Install() {
-  	checkSystem
-   	archAffix
+    checkSystem
+    archAffix
     CMD_UPGRADE
     CMD_INSTALL python2.7
-	  wget -N --no-check-certificate https://raw.githubusercontent.com/Slotheve/backup/main/pip2.py
-	  python2.7 pip2.py && rm pip2.py >/dev/null
+    wget -N --no-check-certificate https://raw.githubusercontent.com/Slotheve/backup/main/pip2.py
+    python2.7 pip2.py && rm pip2.py >/dev/null
     colorEcho $BLUE " 安装完成"
 }
 
