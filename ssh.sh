@@ -46,6 +46,7 @@ Install() {
       else
           colorEcho $RED "输入错误, 请输入正确的端口。"
           echo ""
+	  exit 1
       fi
   else
       colorEcho $RED "输入错误, 请输入数字。"
