@@ -54,9 +54,11 @@ Install() {
       exit 1
   fi
   sed -i '/Port 22/d' /etc/ssh/sshd_config 
+  sed -i '/PermitRootLogin/d' /etc/ssh/sshd_config
   sed -i '/PubkeyAuthentication/d' /etc/ssh/sshd_config 
   sed -i '/PasswordAuthentication/d' /etc/ssh/sshd_config 
-  echo "Port $PORT" >> /etc/ssh/sshd_config 
+  echo "Port $PORT" >> /etc/ssh/sshd_config
+  echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
   echo "PubkeyAuthentication yes" >> /etc/ssh/sshd_config 
   echo "PasswordAuthentication no" >> /etc/ssh/sshd_config 
   systemctl restart sshd
